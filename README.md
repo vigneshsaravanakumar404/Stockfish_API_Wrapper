@@ -69,8 +69,6 @@ Start the server
 Takes two numbers and returns the sum.
 
 
-## License
-[MIT](https://choosealicense.com/licenses/mit/)
 
 
 ## Acknowledgements
