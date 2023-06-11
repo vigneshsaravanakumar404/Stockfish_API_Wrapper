@@ -151,11 +151,13 @@ def is_move_correct_page():
 
 @app.route('/get-top-moves/', methods=['GET'])
 def get_top_moves_page():
+    print("request got here")
     try:
         fen = str(request.args.get('fen'))
         number = int(request.args.get('number'))
         stockfish.set_fen_position(fen)
         return str(stockfish.get_top_moves(number))
+
 
     except Exception as e:
         app.logger.error(str(e))
