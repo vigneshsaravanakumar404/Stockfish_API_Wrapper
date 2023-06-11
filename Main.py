@@ -1,6 +1,5 @@
 from stockfish import Stockfish
 from flask import *
-import json
 import time
 import pyuac
 
@@ -28,6 +27,17 @@ stockfish = Stockfish(
 # FEN
 
 
+from flask import jsonify
+
+# Error handlers
+@app.errorhandler(400)
+def bad_request_error(error):
+    return jsonify({'error': 'Bad request'}), 400
+
+@app.errorhandler(500)
+def internal_server_error(error):
+    return jsonify({'error': 'Internal server error'}), 500
+
 # Methods
 @app.route('/', methods=['GET'])
 def home_page():
@@ -37,105 +47,131 @@ def home_page():
 
 @app.route('/engine/elo/', methods=['GET'])
 def new_engine_elo_page():
-    contempt = str(request.args.get('contempt'))
-    min_split_depth = str(request.args.get('min-split-depth'))
-    ponder = str(request.args.get('ponder'))
-    minimum_thinking_time = str(request.args.get('minimum-thinking-time'))
-    uci_chess960 = str(request.args.get('uci-chess960'))
-    uci_limit_strength = str(request.args.get('uci-limit-strength'))
-    fen = str(request.args.get('fen'))
-    if str(request.args.get('uci_elo')) == "None":
-        elo = 1350
-    else:
-        elo = int(request.args.get('uci_elo'))
+    try:
+        contempt = str(request.args.get('contempt'))
+        min_split_depth = str(request.args.get('min-split-depth'))
+        ponder = str(request.args.get('ponder'))
+        minimum_thinking_time = str(request.args.get('minimum-thinking-time'))
+        uci_chess960 = str(request.args.get('uci-chess960'))
+        uci_limit_strength = str(request.args.get('uci-limit-strength'))
+        fen = str(request.args.get('fen'))
 
-    dict.append(['Contempt', contempt])
-    dict.append(['Min Split Depth', min_split_depth])
-    dict.append(['Ponder', ponder])
-    dict.append(['Minimum Thinking Time', minimum_thinking_time])
-    dict.append(['UCI_Chess960', uci_chess960])
-    dict.append(['UCI_LimitStrength', uci_limit_strength])
+        elo = int(request.args.get('uci_elo')) or 1350
 
-    parameters = {}
-    for item in dict:
-        if item[1] != "None":
-            parameters[item[0]] = item[1]
+        dict.append(['Contempt', contempt])
+        dict.append(['Min Split Depth', min_split_depth])
+        dict.append(['Ponder', ponder])
+        dict.append(['Minimum Thinking Time', minimum_thinking_time])
+        dict.append(['UCI_Chess960', uci_chess960])
+        dict.append(['UCI_LimitStrength', uci_limit_strength])
 
-    # Set default value for fen if it is not provided
-    if fen is None:
-        fen = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
+        parameters = {}
+        for item in dict:
+            if item[1] != "None":
+                parameters[item[0]] = item[1]
 
-    stockfish.update_engine_parameters(parameters)
-    stockfish.set_fen_position(fen)
-    stockfish.set_elo_rating(int(elo))
+        # Set default value for fen if it is not provided
+        if fen is None:
+            fen = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
 
-    return stockfish.get_best_move()
+        stockfish.update_engine_parameters(parameters)
+        stockfish.set_fen_position(fen)
+        stockfish.set_elo_rating(int(elo))
+
+        return stockfish.get_best_move()
+
+    except Exception as e:
+        app.logger.error(str(e))
+        return jsonify({'error': 'Erroneous input'}), 400
 
 
 @app.route('/engine/level/', methods=['GET'])
 def engine_level_page():
-    contempt = str(request.args.get('contempt'))
-    min_split_depth = str(request.args.get('min-split-depth'))
-    ponder = str(request.args.get('ponder'))
-    minimum_thinking_time = str(request.args.get('minimum-thinking-time'))
-    uci_chess960 = str(request.args.get('uci-chess960'))
-    uci_limit_strength = str(request.args.get('uci-limit-strength'))
-    fen = str(request.args.get('fen'))
-    if str(request.args.get('skill-level')) == "None":
-        skillLevel = 1350
-    else:
-        skillLevel = int(request.args.get('skill-level'))
+    try:
+        contempt = str(request.args.get('contempt'))
+        min_split_depth = str(request.args.get('min-split-depth'))
+        ponder = str(request.args.get('ponder'))
+        minimum_thinking_time = str(request.args.get('minimum-thinking-time'))
+        uci_chess960 = str(request.args.get('uci-chess960'))
+        uci_limit_strength = str(request.args.get('uci-limit-strength'))
+        fen = str(request.args.get('fen'))
 
-    dict.append(['Contempt', contempt])
-    dict.append(['Min Split Depth', min_split_depth])
-    dict.append(['Ponder', ponder])
-    dict.append(['Minimum Thinking Time', minimum_thinking_time])
-    dict.append(['UCI_Chess960', uci_chess960])
-    dict.append(['UCI_LimitStrength', uci_limit_strength])
+        skillLevel = int(request.args.get('skill-level')) or 1350
 
-    parameters = {}
-    for item in dict:
-        if item[1] != "None":
-            parameters[item[0]] = item[1]
+        dict.append(['Contempt', contempt])
+        dict.append(['Min Split Depth', min_split_depth])
+        dict.append(['Ponder', ponder])
+        dict.append(['Minimum Thinking Time', minimum_thinking_time])
+        dict.append(['UCI_Chess960', uci_chess960])
+        dict.append(['UCI_LimitStrength', uci_limit_strength])
 
-    # Set default value for fen if it is not provided
-    if fen is None:
-        fen = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
+        parameters = {}
+        for item in dict:
+            if item[1] != "None":
+                parameters[item[0]] = item[1]
 
-    stockfish.update_engine_parameters(parameters)
-    stockfish.set_fen_position(fen)
-    stockfish.set_skill_level(int(skillLevel))
+        # Set default value for fen if it is not provided
+        if fen is None:
+            fen = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1"
 
-    return stockfish.get_best_move()
+        stockfish.update_engine_parameters(parameters)
+        stockfish.set_fen_position(fen)
+        stockfish.set_skill_level(int(skillLevel))
+
+        return stockfish.get_best_move()
+
+    except Exception as e:
+        app.logger.error(str(e))
+        return jsonify({'error': 'Erroneous input'}), 400
 
 
 @app.route('/is-fen-valid/', methods=['GET'])
 def is_fen_valid_page():
-    fen = str(request.args.get('fen'))
-    return str(stockfish.is_fen_valid(fen))
+    try:
+        fen = str(request.args.get('fen'))
+        return str(stockfish.is_fen_valid(fen))
+
+    except Exception as e:
+        app.logger.error(str(e))
+        return jsonify({'error': 'Erroneous input'}), 400
 
 
 @app.route('/is-move-correct/', methods=['GET'])
 def is_move_correct_page():
-    fen = str(request.args.get('fen'))
-    move = str(request.args.get('move'))
-    stockfish.set_fen_position(fen)
-    return str(stockfish.is_move_correct(move))
+    try:
+        fen = str(request.args.get('fen'))
+        move = str(request.args.get('move'))
+        stockfish.set_fen_position(fen)
+        return str(stockfish.is_move_correct(move))
+
+    except Exception as e:
+        app.logger.error(str(e))
+        return jsonify({'error': 'Erroneous input'}), 400
 
 
 @app.route('/get-top-moves/', methods=['GET'])
 def get_top_moves_page():
-    fen = str(request.args.get('fen'))
-    number = int(request.args.get('number'))
-    stockfish.set_fen_position(fen)
-    return str(stockfish.get_top_moves(number))
+    try:
+        fen = str(request.args.get('fen'))
+        number = int(request.args.get('number'))
+        stockfish.set_fen_position(fen)
+        return str(stockfish.get_top_moves(number))
+
+    except Exception as e:
+        app.logger.error(str(e))
+        return jsonify({'error': 'Erroneous input'}), 400
 
 
 @app.route('/get-evaluation/', methods=['GET'])
 def get_evaluation_page():
-    fen = str(request.args.get('fen'))
-    stockfish.set_fen_position(fen)
-    return str(stockfish.get_evaluation())
+    try:
+        fen = str(request.args.get('fen'))
+        stockfish.set_fen_position(fen)
+        return str(stockfish.get_evaluation())
+
+    except Exception as e:
+        app.logger.error(str(e))
+        return jsonify({'error': 'Erroneous input'}), 400
 
 
 def main():
