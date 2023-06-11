@@ -7,11 +7,12 @@ import pyuac
 # Methods
 
 app = Flask(__name__)
+
+
 @app.route('/', methods=['GET'])
 def home_page():
-
-
     return ""
+
 
 @app.route('/user/', methods=['GET'])
 def request_page():
@@ -24,21 +25,16 @@ def request_page():
     return json_dump
 
 
-
 def main():
-
     app.run(port=7777)
-
 
     # Stock Fish cmds
     # stockfish = Stockfish(path=r"C:\Users\Vigne\Downloads\stockfish_15.1_win_x64_popcnt\stockfish_15.1_win_x64_popcnt\stockfish-windows-2022-x86-64-modern.exe", depth=18, parameters={"Threads": 2, "Minimum Thinking Time": 30})
     # stockfish.set_fen_position("r1bqkbnr/pppp1ppp/2n5/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R b KQkq - 0 1")
     # print(stockfish.get_best_move())
 
-
-
-
     input("Press enter to close the window. >")
+
 
 # Run as admin
 if __name__ == "__main__":
@@ -48,10 +44,8 @@ if __name__ == "__main__":
     else:
         main()
 
-
-    # How to starts
+    # How to start
 """Fire it up: ngrok http 7777"""
-
 
 # how to access from computer
 """
