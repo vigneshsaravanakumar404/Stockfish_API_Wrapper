@@ -132,7 +132,7 @@ Run the program and start Ngrok tunnel
     <img src="https://raw.githubusercontent.com/vigneshsaravanakumar404/skill-icons/main/icons/Idea-Dark.svg" width="64" height="64" alt="IntelliJ IDEA">
 </div>
 
-## Acknowledgements
+## References
 - [Ngrok](https://ngrok.com/)
 - [SVG Graphics Explanation](https://developer.mozilla.org/en-US/docs/Web/SVG)
 - [Stockfish 3.28.0 Pypi](https://pypi.org/project/stockfish/)
