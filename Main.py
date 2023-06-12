@@ -11,7 +11,6 @@ app = Flask(__name__)
 dict = []
 stockfish = Stockfish(path=STOCKFISH_PATH)
 
-
 # Contempt
 # Min Split Depth
 # Threads
@@ -31,14 +30,17 @@ stockfish = Stockfish(path=STOCKFISH_PATH)
 
 from flask import jsonify
 
+
 # Error handlers
 @app.errorhandler(400)
 def bad_request_error(error):
     return jsonify({'error': 'Bad request'}), 400
 
+
 @app.errorhandler(500)
 def internal_server_error(error):
     return jsonify({'error': 'Internal server error'}), 500
+
 
 # Methods
 @app.route('/', methods=['GET'])
@@ -159,7 +161,6 @@ def get_top_moves_page():
         number = int(request.args.get('number'))
         stockfish.set_fen_position(fen)
         return str(stockfish.get_top_moves(number))
-
 
     except Exception as e:
         app.logger.error(str(e))

@@ -12,7 +12,7 @@ API Wrapper is used in my Mobile Application Development Course final, [Chess](h
 
 ![img_3.png](img_3.png)
 
-#### Flask server mirroed on Ngrok
+#### Flask server tunnelled on Ngrok
 ![img_1.png](img_1.png)
 
 #### Sample output for request of top 5 best moves in standard chess position
@@ -57,32 +57,81 @@ Run the program and start Ngrok tunnel
 
 ## API Reference
 
-
-#### Get all items
-
-```http
-  GET /api/items
-```
-
-| Parameter | Type     | Description                |
-| :-------- | :------- | :------------------------- |
-| `api_key` | `string` | **Required**. Your API key |
-
-#### Get item
+#### Get best move based on elo
 
 ```http
-  GET /api/items/${id}
+  GET /api/bestmove/
 ```
 
-| Parameter | Type     | Description                       |
-| :-------- | :------- | :-------------------------------- |
-| `id`      | `string` | **Required**. Id of item to fetch |
+| Parameter               | Type      | Description                                      |
+|:------------------------|:----------|:-------------------------------------------------|
+| `elo`                   | `int`     | **Required** Elo Stockfish will play at          |
+| `contempt`              | `int`     | Aggression of Stockfish                          |
+| `min-split-depth`       | `int`     | Minimum depth Stockfish will search to           |
+| `ponder`                | `boolean` | Allow the engine to think during opponent's turn |
+| `threads`               | `int`     | Number of threads Stockfish will use             |
+| `multipv`               | `int`     | Number of best moves to return                   |
+| `fen`                   | `string`  | **Required** FEN of board position               |
+| `minimum-thinking-time` | `int`     | Minimum thinking time                            |
+| `uci-chess960`          | `boolean` | Set Chess960                                     |
+| `uci-limit-strength`    | `boolean` | Limit max Stockfish level                        |
 
-#### add(num1, num2)
 
-Takes two numbers and returns the sum.
+#### Get best move based on level
 
+```http
+    GET /api/bestmove/
+```
+| Parameter               | Type      | Description                                      |
+|:------------------------|:----------|:-------------------------------------------------|
+| `skill-level`           | `int`     | **Required** Elo Stockfish will play at          |
+| `contempt`              | `int`     | Aggression of Stockfish                          |
+| `min-split-depth`       | `int`     | Minimum depth Stockfish will search to           |
+| `ponder`                | `boolean` | Allow the engine to think during opponent's turn |
+| `threads`               | `int`     | Number of threads Stockfish will use             |
+| `multipv`               | `int`     | Number of best moves to return                   |
+| `fen`                   | `string`  | **Required** FEN of board position               |
+| `minimum-thinking-time` | `int`     | Minimum thinking time                            |
+| `uci-chess960`          | `boolean` | Set Chess960                                     |
+| `uci-limit-strength`    | `boolean` | Limit max Stockfish level                        |
 
+#### Check if FEN is valid
+
+```http
+    GET /is-fen-valid/
+```
+| Parameter               | Type      | Description                        |
+|:------------------------|:----------|:-----------------------------------|
+| `fen`                   | `string`  | **Required** FEN of board position |
+
+####  Check if move is valid
+
+```http
+    GET /is-move-correct/
+```
+| Parameter               | Type      | Description                        |
+|:------------------------|:----------|:-----------------------------------|
+| `fen`                   | `string`  | **Required** FEN of board position |
+| `move`                  | `string`  | **Required** Move to check         |
+
+#### Get evaluation of position
+
+```http
+    GET /get-evaluation/
+```
+| Parameter               | Type      | Description                        |
+|:------------------------|:----------|:-----------------------------------|
+| `fen`                   | `string`  | **Required** FEN of board position |
+
+#### Get top moves
+
+```http
+    GET /get-top-moves/
+```
+| Parameter | Type     | Description                        |
+|:----------|:---------|:-----------------------------------|
+| `fen`     | `string` | **Required** FEN of board position |
+| `number`  | `int`    | **Required** Number of moves       |
 
 
 ## Acknowledgements
@@ -92,7 +141,5 @@ Takes two numbers and returns the sum.
 - [Python API Explanation](https://www.youtube.com/watch?v=5ZMpbdK0uqU&t=7s&ab_channel=Indently)
 - [Awesome README](https://github.com/matiassingers/awesome-readme)
 
-
-# Images for later
 
 
