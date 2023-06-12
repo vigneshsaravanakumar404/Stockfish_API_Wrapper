@@ -1,12 +1,22 @@
 # Stockfish API Wrapper
-
-
+Simple Stockfish API wrapper. Allows users to access powerful chess engine 
+functionality, retrieve moves and evaluations from FEN and complete use of all Stockfish 
+methods from native c++ code. Provides a convenient way to access Stockfish from anywhere. The 
+API Wrapper is used in my Mobile Application Development Course final, [Chess](https://github.com/vigneshsaravanakumar404/Chess). 
 
 
 
 ## Screenshots
 
+#### Flask server running on localhost
 
+![img_3.png](img_3.png)
+
+#### Flask server mirroed on Ngrok
+![img_1.png](img_1.png)
+
+#### Sample output for request of top 5 best moves in standard chess position
+![img.png](img.png)
 
 
 ## Tech Stack
@@ -15,34 +25,37 @@
 <img src="https://raw.githubusercontent.com/tandpfun/skill-icons/59059d9d1a2c092696dc66e00931cc1181a4ce1f/icons/Flask-Dark.svg" width="64" height="64" alt="Flask">
 <img src="https://raw.githubusercontent.com/vigneshsaravanakumar404/skill-icons/main/icons/Idea-Dark.svg" width="64" height="64" alt="IntelliJ IDEA">
 
-## Run Locally
 
-Clone the project
+## Installation
 
+Clone the project and Stockfish 15.1
 ```bash
-  git clone https://link-to-project
-```
-
-Go to the project directory
-
-```bash
-  cd my-project
+  git clone https://github.com/vigneshsaravanakumar404/Stockfish_API_Wrapper.git
+  git clone https://github.com/official-stockfish/Stockfish.git
 ```
 
 Install dependencies
 
 ```bash
-  npm install
+  pip install 
+  pip stockfish 
+  pip Flask 
+  pip pyuac
 ```
+Change stockfish path from
+``` 
+    STOCKFISH_PATH = "C:/Users/vigne/PycharmProjects/Stockfish_API_Wrapper/Stockfish/src/stockfish.exe"
+```
+to your stockfish path in app.py
 
-Start the server
-
+Run the program and start Ngrok tunnel
 ```bash
-  npm run start
+  python app.py
+  ngrok http 5000
 ```
-
 
 ## API Reference
+
 
 #### Get all items
 
@@ -80,8 +93,5 @@ Takes two numbers and returns the sum.
 
 
 # Images for later
-![img.png](img.png)
-![img_1.png](img_1.png)
-![img_3.png](img_3.png)
-![img_4.png](img_4.png)
+
 

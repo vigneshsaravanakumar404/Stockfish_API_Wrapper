@@ -3,11 +3,13 @@ from flask import *
 import time
 import pyuac
 
+#
+STOCKFISH_PATH = r"C:\\Users\\Vigne\\Downloads\\stockfish_15.1_win_x64_popcnt\\stockfish_15.1_win_x64_popcnt\\stockfish-windows-2022-x86-64-modern.exe"
+
 # Variables
 app = Flask(__name__)
 dict = []
-stockfish = Stockfish(
-    path=r"C:\\Users\\Vigne\\Downloads\\stockfish_15.1_win_x64_popcnt\\stockfish_15.1_win_x64_popcnt\\stockfish-windows-2022-x86-64-modern.exe")
+stockfish = Stockfish(path=STOCKFISH_PATH)
 
 
 # Contempt
