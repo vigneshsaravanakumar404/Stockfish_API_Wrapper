@@ -20,11 +20,14 @@ API Wrapper is used in my Mobile Application Development Course final, [Chess](h
 
 
 ## Tech Stack
-<img src="https://raw.githubusercontent.com/tandpfun/skill-icons/59059d9d1a2c092696dc66e00931cc1181a4ce1f/icons/Python-Dark.svg" width="64" height="64" alt="Python">
-<img src="https://images.igdb.com/igdb/image/upload/t_cover_big_2x/ugtrhiksvdkmjekcbesf.jpg" width="64" height="64" alt="Stockfish">
-<img src="https://raw.githubusercontent.com/tandpfun/skill-icons/59059d9d1a2c092696dc66e00931cc1181a4ce1f/icons/Flask-Dark.svg" width="64" height="64" alt="Flask">
-<img src="https://raw.githubusercontent.com/vigneshsaravanakumar404/skill-icons/main/icons/Idea-Dark.svg" width="64" height="64" alt="IntelliJ IDEA">
-
+<div>
+    <img src="https://raw.githubusercontent.com/tandpfun/skill-icons/59059d9d1a2c092696dc66e00931cc1181a4ce1f/icons/Python-Dark.svg" width="64" height="64" alt="Python">
+    <img src="https://images.igdb.com/igdb/image/upload/t_cover_big_2x/ugtrhiksvdkmjekcbesf.jpg" width="64" height="64" alt="Stockfish">
+</div>
+<div>
+    <img src="https://raw.githubusercontent.com/tandpfun/skill-icons/59059d9d1a2c092696dc66e00931cc1181a4ce1f/icons/Flask-Dark.svg" width="64" height="64" alt="Flask">
+    <img src="https://raw.githubusercontent.com/vigneshsaravanakumar404/skill-icons/main/icons/Idea-Dark.svg" width="64" height="64" alt="IntelliJ IDEA">
+</div>
 
 ## Installation
 
